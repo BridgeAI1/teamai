@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: teamai-bridgeai
+    runtime: docker
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: NODE_ENV
+        value: production
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BUSINESS_NAME
+        value: BridgeAI
+      - key: BUSINESS_EMAIL
+        value: alex@bridgeaihq.com
