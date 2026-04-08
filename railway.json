@@ -1,0 +1,23 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "dockerfile",
+    "buildCommand": "npm ci && npm run build 2>/dev/null || true"
+  },
+  "deploy": {
+    "startCommand": "node server.js",
+    "restartPolicyType": "always",
+    "restartPolicyMaxRetries": 5,
+    "healthchecks": {
+      "readiness": {
+        "command": "node -e \"require('http').get('http://localhost:3001/api/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))\"",
+        "interval": 30,
+        "timeout": 10
+      }
+    }
+  },
+  "variables": {
+    "PORT": "3001",
+    "NODE_ENV": "production"
+  }
+}
